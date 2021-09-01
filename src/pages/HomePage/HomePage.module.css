@@ -1,0 +1,28 @@
+.HomePage {
+  display: grid;
+  grid-template-rows: 6rem 1fr;
+}
+
+.Header {
+  position: sticky;
+  top: 0%;
+  padding: 0rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  color: white;
+  background-color: #1e1e1e;
+}
+
+.Sections {
+  padding: 1rem;
+}
+
+.Body {
+  margin: 1rem;
+  height: calc(100vh - 8rem);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
+  grid-gap: 1rem;
+}

@@ -1,0 +1,22 @@
+.FoodsPage {
+  display: grid;
+  grid-template-rows: 6rem 1fr;
+}
+
+.Header {
+  position: sticky;
+  top: 0%;
+  padding: 0rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  color: white;
+  background-color: #1e1e1e;
+}
+
+.DropDownFilter {
+  flex: 1;
+  margin: auto 2rem;
+  padding: 0.4rem;
+  cursor: pointer;
+}
