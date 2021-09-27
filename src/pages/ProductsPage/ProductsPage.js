@@ -15,11 +15,16 @@ import Backdrop from "../../components/UI/Backdrop/Backdrop";
 
 const cats = [
   { id: 1, value: "groceries", name: "Groceries" },
-  { id: 2, value: "cosmetics", name: "Cosmetics" },
-  { id: 3, value: "mobileAccessories", name: "Mobile Accessories" },
-  { id: 4, value: "accessories", name: "Accessories" },
-  { id: 5, value: "kidsSection", name: "Kid's Section" },
+  { id: 2, value: "fruits", name: "Fruits" },
+  { id: 3, value: "vegetables", name: "Vegetables" },
+  { id: 4, value: "meat", name: "Meat" },
+  { id: 5, value: "homemade", name: "Homemade" },
   { id: 6, value: "gifts", name: "Gifts" },
+  { id: 7, value: "headphones", name: "Headphones" },
+  { id: 8, value: "mobilecases", name: "Mobile Cases" },
+  { id: 9, value: "cosmetics", name: "Cosmetics" },
+  { id: 10, value: "offer1", name: "Offer Zone 1" },
+  { id: 11, value: "offer2", name: "Offer Zone 2" },
 ];
 
 const ProductsPage = (props) => {
