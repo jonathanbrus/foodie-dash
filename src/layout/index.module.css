@@ -1,0 +1,19 @@
+.Container {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 240px 1fr;
+}
+
+.Page {
+  display: flex;
+}
+
+.Page > div {
+  flex: 1;
+}
+
+@media screen and (max-width: 600px) {
+  .Container {
+    grid-template-columns: 1fr;
+  }
+}

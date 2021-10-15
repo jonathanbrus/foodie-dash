@@ -5,7 +5,7 @@ import { Provider } from "react-redux";
 
 import { Store } from "./store/store";
 import "./index.css";
-import App from "./App";
+import App from "./app";
 import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(

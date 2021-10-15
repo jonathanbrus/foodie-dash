@@ -1,10 +1,10 @@
 import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 
-import { OrdersReducer } from "./reducers/OrdersReducer";
-import { FoodsReducer } from "./reducers/FoodsReducer";
-import { ProductsReducer } from "./reducers/ProductsReducer";
-import { RestaurantsReducer } from "./reducers/RestaurantsReducer";
+import { OrdersReducer } from "./reducers/orders";
+import { FoodsReducer } from "./reducers/foods";
+import { ProductsReducer } from "./reducers/products";
+import { RestaurantsReducer } from "./reducers/restaurants";
 
 const middlewares = [thunk];
 

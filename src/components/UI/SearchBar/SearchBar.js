@@ -1,6 +1,6 @@
 import React from "react";
 
-import classes from "./SearchBar.module.css";
+import classes from "./searchBar.module.css";
 import { search } from "../../../svgs";
 
 const SearchBar = (props) => {

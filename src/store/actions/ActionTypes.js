@@ -1,29 +1,27 @@
-export const FETCHALLFOODS = "FETCHALLFOODS";
+export const orderTypes = {
+  get: "GETORDER",
+  updateOne: "UPDATEONEORDER",
+};
 
-export const ADDFOOD = "ADDFOOD";
+export const restaurantTypes = {
+  get: "GETRESTAURANT",
+  create: "CREATERESTAURANT",
+  updateOne: "UPDATEONERESTAURANT",
+  deleteOne: "DELETEONERESTAURANT",
+  toggle: "TOGGLEAVAILABILITYRESTAURANT",
+};
 
-export const EDITFOOD = "EDITFOOD";
+export const foodTypes = {
+  get: "GETFOOD",
+  create: "CREATEFOOD",
+  updateOne: "UPDATEONEFOOD",
+  deleteOne: "DELETEONEFOOD",
+  toggle: "TOGGLEAVAILABILITYFOOD",
+};
 
-export const DELETEFOOD = "DELETEFOOD";
-
-export const FETCHPRODUCTS = "FETCHPRODUCTS";
-
-export const ADDPRODUCT = "ADDPRODUCT";
-
-export const EDITPRODUCT = "EDITPRODUCT";
-
-export const TOGGLEACTIVERESTAURANT = "TOGGLEACTIVERESTAURANT";
-
-export const DELETEPRODUCT = "DELETEPRODUCT";
-
-export const FETCHALLRESTAURANTS = "FETCHALLRESTAURANTS";
-
-export const ADDRESTAURANT = "ADDRESTAURANT";
-
-export const EDITRESTAURANT = "EDITRESTAURANT";
-
-export const DELETERESTAURANT = "DELETERESTAURANT";
-
-export const FETCHALLORDERS = "FETCHALLORDERS";
-
-export const EDITORDER = "EDITORDER";
+export const productTypes = {
+  get: "GETPRODUCT",
+  create: "CREATEPRODUCT",
+  updateOne: "UPDATEONEPRODUCT",
+  deleteOne: "DELETEONEPRODUCT",
+};

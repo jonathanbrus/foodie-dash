@@ -1,51 +1,58 @@
-import React, { useEffect } from "react";
-import { connect } from "react-redux";
+import React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 
-import { fetchAllRestaurants } from "./store/actions/RestaurantsActions";
-import SideNavBar from "./components/SideNavBar/SideNavBar";
-import "./App.css";
+import { AppLayout } from "./layout";
+import "./index.css";
 
 // Pages
-import HomePage from "./pages/HomePage/HomePage";
-import OrdersPage from "./pages/OrdersPage/OrdersPage";
-import FoodsPage from "./pages/FoodsPage/FoodsPage";
-import ProductsPage from "./pages/ProductsPage/ProductsPage";
-import RestaurantsPage from "./pages/RestaurantsPage/RestaurantsPage";
+import Orders from "./modules/orders";
+import Restaurants from "./modules/restaurants";
+import Foods from "./modules/foods";
+import Products from "./modules/products";
+import RestaurantForm from "./modules/restaurants/form";
+import FoodForm from "./modules/foods/form";
+import ProductForm from "./modules/products/form";
 
-function App(props) {
-  const { fetchAllRestaurants } = props;
-
-  useEffect(() => {
-    fetchAllRestaurants();
-  }, [fetchAllRestaurants]);
+function App() {
   return (
     <div className="App">
-      <div className="App-Container">
-        <SideNavBar />
-        <div className="Pages">
-          <Switch>
-            <Route path="/" exact render={() => <HomePage />} />
-            <Route path="/Orders" exact render={() => <OrdersPage />} />
-            <Route path="/Foods" exact render={() => <FoodsPage />} />
-            <Route path="/Products" exact render={() => <ProductsPage />} />
-            <Route
-              path="/Restaurants"
-              exact
-              render={() => <RestaurantsPage />}
-            />
-            <Redirect from="*" to="/" />
-          </Switch>
-        </div>
-      </div>
+      <AppLayout>
+        <Switch>
+          <Route path="/" exact>
+            <Orders />
+          </Route>
+          <Route path="/restaurants" exact>
+            <Restaurants />
+          </Route>
+          <Route path="/foods/:restaurantId" exact>
+            <Foods />
+          </Route>
+          <Route path="/products" exact>
+            <Products />
+          </Route>
+          <Route path="/foods/create/:restaurantId" exact>
+            <FoodForm />
+          </Route>
+          <Route path="/foods/update/:restaurantId/:foodId" exact>
+            <FoodForm />
+          </Route>
+          <Route path="/restaurant/create" exact>
+            <RestaurantForm />
+          </Route>
+          <Route path="/restaurant/update/:restaurantId" exact>
+            <RestaurantForm />
+          </Route>
+          <Route path="/product/create/:category" exact>
+            <ProductForm />
+          </Route>
+          <Route path="/product/update/:productId" exact>
+            <ProductForm />
+          </Route>
+          <Redirect from="*" to="/" />
+        </Switch>
+      </AppLayout>
     </div>
   );
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    fetchAllRestaurants: () => dispatch(fetchAllRestaurants()),
-  };
-};
-
-export default connect(null, mapDispatchToProps)(App);
+export default App;
