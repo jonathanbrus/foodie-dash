@@ -57,7 +57,11 @@ const AddRestaurant = ({
 
     !restaurant
       ? createRestaurant(formData)
-      : updateRestaurant({ ...formData, id: restaurant._id });
+      : updateRestaurant({
+          ...formData,
+          rating: restaurant.rating,
+          id: restaurant._id,
+        });
     history.goBack();
   };
 
@@ -188,7 +192,7 @@ const initialState = (restaurant) => {
     long: restaurant ? `${restaurant.geoPoint.long}` : "",
     topPicks: restaurant ? restaurant.topPicks : "",
     popular: restaurant ? restaurant.popular : false,
-    offer: restaurant ? restaurant.offer : "",
+    offer: restaurant ? `${restaurant.offer}` : "",
     from: restaurant ? `${restaurant.timing.from}` : "",
     to: restaurant ? `${restaurant.timing.to}` : "",
   };

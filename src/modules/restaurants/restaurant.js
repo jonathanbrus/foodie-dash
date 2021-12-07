@@ -39,7 +39,7 @@ const Restaurant = ({ restaurant, toggleAvailability, deleteRestaurant }) => {
             zIndex: "0",
           }}
           name="read-only"
-          value={4.6 || restaurant.rating}
+          value={restaurant.rating}
           precision={0.1}
           readOnly
         />

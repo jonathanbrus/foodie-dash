@@ -31,7 +31,14 @@ const Product = ({ product, deleteProduct }) => {
           <Mui.Typography sx={{ fontSize: "1.2rem" }}>
             {product.name}
           </Mui.Typography>
-          <Mui.Rating name="read-only" value={4.4 || product.rating} readOnly />
+          <Mui.Rating
+            name="read-only"
+            value={
+              Number((Math.random() * (4.8 - 3.8) + 3.8).toPrecision(2)) ||
+              product.rating
+            }
+            readOnly
+          />
           <Mui.Typography
             sx={{ fontSize: "1rem" }}
             variant="body2"

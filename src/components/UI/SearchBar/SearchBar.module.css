@@ -1,6 +1,8 @@
 .Search {
-  width: 50%;
+  width: calc(100% - 3.5rem);
+  max-width: 400px;
   padding: 0.2rem;
+  margin: 0 1rem 1rem 1.5rem;
   display: flex;
   align-items: center;
   border: 1px solid black;
@@ -14,16 +16,4 @@
   padding: 0.6rem 1rem;
   border: none;
   outline: none;
-}
-
-.SearchIcon {
-  position: relative;
-  background-color: #212121;
-  padding: 0.6rem 0.7rem;
-  border-radius: 50%;
-}
-
-.SearchIcon > svg {
-  position: relative;
-  top: 2px;
 }

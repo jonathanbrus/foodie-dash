@@ -46,7 +46,10 @@ const Food = ({ food, deleteFood, toggleAvailability }) => {
           <Mui.Rating
             name="read-only"
             style={{ zIndex: 0 }}
-            value={4.5 || food.rating}
+            value={
+              Number((Math.random() * (4.8 - 3.8) + 3.8).toPrecision(2)) ||
+              food.rating
+            }
             precision={0.1}
             readOnly
           />

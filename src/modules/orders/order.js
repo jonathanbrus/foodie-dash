@@ -7,7 +7,7 @@ import moment from "moment";
 
 import { orderActions } from "../../store/actions/orders";
 
-const Order = ({ order, editOrder }) => {
+const Order = ({ order, updateOrder }) => {
   const [edit, toggleEdit] = useState(false);
   const [status, setStatus] = useState(
     order.orderStatus.toLowerCase() === "order placed"
@@ -24,13 +24,23 @@ const Order = ({ order, editOrder }) => {
 
   const submit = () => {
     if (edit) {
-      editOrder(order._id, paid, status, order);
+      updateOrder(order._id, paid, status, order);
+      toggleEdit((prev) => !prev);
     }
   };
 
   return (
     <div>
-      <Mui.Card elevation={4}>
+      <Mui.Card
+        elevation={4}
+        sx={{
+          backgroundColor:
+            order.orderStatus.toLowerCase() === "order placed"
+              ? "#fee7e9"
+              : "white",
+          margin: "0rem 0rem 1rem 1rem",
+        }}
+      >
         <Mui.CardHeader
           title={order.buyFrom}
           subheader={moment(order.createdAt).format("MMMM Do YYYY, h:mm:ss a")}
@@ -52,15 +62,26 @@ const Order = ({ order, editOrder }) => {
                   <Cancel fontSize="small" />
                 </Mui.IconButton>
               )}
-              <Mui.IconButton
-                aria-label="settings"
-                onClick={() => {
-                  submit();
-                  toggleEdit((prev) => !prev);
-                }}
-              >
-                {edit ? <Check fontSize="small" /> : <Edit fontSize="small" />}
-              </Mui.IconButton>
+
+              {edit ? (
+                <Mui.IconButton
+                  aria-label="settings"
+                  onClick={() => {
+                    submit();
+                  }}
+                >
+                  <Check fontSize="small" />
+                </Mui.IconButton>
+              ) : (
+                <Mui.IconButton
+                  aria-label="settings"
+                  onClick={() => {
+                    toggleEdit((prev) => !prev);
+                  }}
+                >
+                  <Edit fontSize="small" />
+                </Mui.IconButton>
+              )}
             </>
           }
           sx={{ paddingBottom: 0 }}
@@ -200,6 +221,7 @@ const orderStatuses = [
   { title: "Packed", value: "Packed" },
   { title: "Out For Delivery", value: "Out For Delivery" },
   { title: "Delivered", value: "Delivered" },
+  { title: "Canceled", value: "Canceled" },
 ];
 
 const paidStatuses = [

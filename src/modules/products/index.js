@@ -7,37 +7,38 @@ import { useHistory } from "react-router-dom";
 import Masonry from "react-masonry-css";
 
 import { prodcutActions } from "../../store/actions/products";
+import { productTypes } from "../../store/actions/actionTypes";
 import { AppBar } from "../../components/appBar";
 import { Loader } from "../../components/ui/loader";
 import Product from "./product";
 import classes from "./index.module.css";
+import SearchBar from "../../components/ui/searchBar/searchBar";
 
-const ProductsPage = (props) => {
-  const { getProducts } = props;
+const ProductsPage = ({
+  getProducts,
+  allProducts,
+  category,
+  selectCategory,
+  editProduct,
+}) => {
   const history = useHistory();
 
-  const [filters, setFilters] = useState({
-    selectmenu: selectmenus[0].filter,
-  });
-  // const [search, setSearch] = useState("");
-  // const [selectedProd, setSelectedProd] = useState(null);
+  const [search, setSearch] = useState("");
 
   const addProduct = () => {
-    history.push(`/product/create/${filters.selectmenu}`);
+    history.push(`/product/create/${category}`);
   };
 
   useEffect(() => {
-    getProducts(filters.selectmenu);
-  }, [getProducts, filters.selectmenu]);
+    getProducts(category);
+  }, [getProducts, category]);
 
-  const AllProducts =
-    // search.length > 0
-    //   ? props.allProducts.filter(
-    //       (food) =>
-    //         food.name.toLowerCase().includes(search.toLowerCase()) && food
-    //     )
-    //   :
-    props.allProducts;
+  let filteredProducts =
+    search.length > 0
+      ? allProducts.filter((product) =>
+          product.name.toLowerCase().includes(search.toLowerCase())
+        )
+      : allProducts;
 
   const breakPoints = {
     default: 3,
@@ -54,10 +55,8 @@ const ProductsPage = (props) => {
             labelId="label"
             label="Categories"
             MenuProps={{ PaperProps: { sx: { maxHeight: 260 } } }}
-            value={filters.selectmenu}
-            onChange={(e) =>
-              setFilters({ ...filters, selectmenu: e.target.value })
-            }
+            value={category}
+            onChange={(e) => selectCategory(e.target.value)}
           >
             {selectmenus.map((menu) => (
               <Mui.MenuItem key={menu.filter} value={menu.filter}>
@@ -70,18 +69,23 @@ const ProductsPage = (props) => {
           <Add />
         </Mui.IconButton>
       </AppBar>
+      <SearchBar
+        value={search}
+        setValue={setSearch}
+        placeholder="Search by name"
+      />
       <div>
-        {AllProducts.length > 0 ? (
+        {allProducts.length > 0 ? (
           <Masonry
             breakpointCols={breakPoints}
             className={classes.myMasonryGrid}
             columnClassName={classes.myMasonryGrid_column}
           >
-            {AllProducts.map((product, index) => (
+            {filteredProducts.map((product, index) => (
               <Product
                 key={index}
                 product={product}
-                editProduct={() => props.editProduct(product)}
+                editProduct={() => editProduct(product)}
               />
             ))}
           </Masonry>
@@ -105,16 +109,20 @@ const selectmenus = [
   { filter: "cosmetics", title: "Cosmetics" },
   { filter: "offer1", title: "Offer Zone 1" },
   { filter: "offer2", title: "Offer Zone 2" },
+  { filter: "offer3", title: "Offer Zone 3" },
 ];
 
 const mapStateToProps = (state) => {
   return {
     allProducts: state.Products.products,
+    category: state.Products.selectedCategory,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    selectCategory: (category) =>
+      dispatch({ type: productTypes.selectCategory, payLoad: category }),
     getProducts: (category) => dispatch(prodcutActions.get(category)),
   };
 };

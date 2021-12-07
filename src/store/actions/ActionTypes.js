@@ -24,4 +24,5 @@ export const productTypes = {
   create: "CREATEPRODUCT",
   updateOne: "UPDATEONEPRODUCT",
   deleteOne: "DELETEONEPRODUCT",
+  selectCategory: "SELECTCATEGORY",
 };

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { IconButton } from "@mui/material";
 import { Add } from "@mui/icons-material";
 
@@ -11,25 +11,25 @@ import { AppBar } from "../../components/appBar";
 import { Loader } from "../../components/ui/loader";
 import Restaurant from "./restaurant";
 import classes from "./index.module.css";
+import SearchBar from "../../components/ui/searchBar/searchBar";
 
-const RestaurantsPage = ({ allRestaurants, getRestaurants }) => {
-  // const [search, setSearch] = useState("");
-
+const RestaurantsPage = ({ restaurants, getRestaurants }) => {
   const history = useHistory();
 
+  const [search, setSearch] = useState("");
+
   useEffect(() => {
-    if (!allRestaurants.length > 0) {
+    if (!restaurants.length > 0) {
       getRestaurants();
     }
-  }, [getRestaurants, allRestaurants]);
+  }, [getRestaurants, restaurants]);
 
-  const restaurants =
-    // search.length > 0
-    //   ? allRestaurants.filter((res) =>
-    //       res.name.toLowerCase().includes(search.toLowerCase())
-    //     )
-    // :
-    allRestaurants;
+  let filteredRestaurants =
+    search.length > 0
+      ? restaurants.filter((res) =>
+          res.name.toLowerCase().includes(search.toLowerCase())
+        )
+      : restaurants;
 
   const addRestaurant = () => {
     history.push("/restaurant/create");
@@ -42,14 +42,19 @@ const RestaurantsPage = ({ allRestaurants, getRestaurants }) => {
           <Add />
         </IconButton>
       </AppBar>
+      <SearchBar
+        value={search}
+        setValue={setSearch}
+        placeholder="Search by name"
+      />
       <div>
-        {allRestaurants.length > 0 ? (
+        {restaurants.length > 0 ? (
           <Masonry
             breakpointCols={breakPoints}
             className={classes.myMasonryGrid}
             columnClassName={classes.myMasonryGrid_column}
           >
-            {restaurants.map((restaurant, index) => (
+            {filteredRestaurants.map((restaurant, index) => (
               <Restaurant key={index} restaurant={restaurant} />
             ))}
           </Masonry>
@@ -69,7 +74,7 @@ const breakPoints = {
 
 const mapStateToProps = (state) => {
   return {
-    allRestaurants: state.Restaurants.restaurants,
+    restaurants: state.Restaurants.restaurants,
   };
 };
 

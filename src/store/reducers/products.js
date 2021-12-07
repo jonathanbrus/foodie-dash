@@ -2,6 +2,7 @@ import { productTypes } from "../actions/actionTypes";
 
 const initialState = {
   products: [],
+  selectedCategory: "groceries",
 };
 
 export const ProductsReducer = (state = initialState, action) => {
@@ -42,6 +43,12 @@ export const ProductsReducer = (state = initialState, action) => {
       return {
         ...state,
         products: state.products.filter((prod) => prod._id !== action.payLoad),
+      };
+
+    case productTypes.selectCategory:
+      return {
+        ...state,
+        selectedCategory: action.payLoad,
       };
 
     default:

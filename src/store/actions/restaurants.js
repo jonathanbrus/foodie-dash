@@ -13,7 +13,7 @@ const get = () => (dispatch) => {
 
 const create = (config) => (dispatch) => {
   axios
-    .post("http://localhost:5000/admin/restaurant", {
+    .post("https://alofoodie.herokuapp.com/admin/restaurant", {
       config: config,
     })
     .then((res) => {
@@ -24,7 +24,7 @@ const create = (config) => (dispatch) => {
 
 const updateOne = (config) => (dispatch) => {
   axios
-    .post("http://localhost:5000/admin/restaurant/update", {
+    .post("https://alofoodie.herokuapp.com/admin/restaurant/update", {
       config: config,
     })
     .then((res) => {

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { IconButton } from "@mui/material";
 import { Add } from "@mui/icons-material";
 
@@ -11,12 +11,13 @@ import { AppBar } from "../../components/appBar";
 import { Loader } from "../../components/ui/loader";
 import Food from "./food";
 import classes from "./index.module.css";
+import SearchBar from "../../components/ui/searchBar/searchBar";
 
 const FoodsPage = ({ fetchFoods, foods }) => {
   const history = useHistory();
   const { restaurantId } = useParams();
 
-  // const [search, setSearch] = useState("");
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     fetchFoods(restaurantId);
@@ -26,10 +27,12 @@ const FoodsPage = ({ fetchFoods, foods }) => {
     history.push(`/foods/create/${restaurantId}`);
   };
 
-  const filteredFoods =
-    // search.length > 0
-    //   ? foods.filter((food) => food.name.includes(search.toLowerCase())) :
-    foods;
+  let filteredFoods =
+    search.length > 0
+      ? foods.filter((food) =>
+          food.name.toLowerCase().includes(search.toLowerCase())
+        )
+      : foods;
 
   return (
     <div>
@@ -38,6 +41,11 @@ const FoodsPage = ({ fetchFoods, foods }) => {
           <Add />
         </IconButton>
       </AppBar>
+      <SearchBar
+        value={search}
+        setValue={setSearch}
+        placeholder="Search by name"
+      />
       <div>
         {foods.length > 0 ? (
           <Masonry
